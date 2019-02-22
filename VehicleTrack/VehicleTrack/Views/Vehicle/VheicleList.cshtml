@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "VheicleList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Scripts{
+    <script src="~/Scripts/index.js"></script>
+}
+    <div id="myVehicles">
+        <h5 data-bind="visible: connected">Connected to message hub</h5>
+        <h2>VheicleList</h2>
+        <!-- ko foreach: vehicles -->
+        <ul>
+            <li data-id="7" data-bind='text:  Status() == true && Id()==$(this).data("id"))   ? "Online" : "Offline"  '>
+
+            </li>
+            <li data-id="9" data-bind='text:  Status() == true && Id()==$(this).data("id"))   ? "Online" : "Offline"  '>
+
+            </li>
+            <li data-id="8" data-bind='text:  Status() == true && Id()==$(this).data("id"))   ? "Online" : "Offline"  '></li>
+        </ul>
+        <!-- /ko -->
+        </div>

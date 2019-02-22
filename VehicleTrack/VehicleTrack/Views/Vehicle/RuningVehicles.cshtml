@@ -1,0 +1,61 @@
+﻿@model IEnumerable<VehicleTrack.Models.Vehicle>
+
+@section Scripts{
+    <script src="~/Scripts/index.js"></script>
+}
+
+@{
+    ViewBag.Title = "RuningVehicles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>RuningVehicles</h2>
+
+<p>
+    @Html.ActionLink("Add Vehicle", "NewVehicle")
+</p>
+<div id="myVehicles">
+    <h5 data-bind="visible: connected">Connected to Cars hub</h5>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.VIN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.ApplicationUserID)
+            </th>*@
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <!-- ko foreach: vehicles -->
+
+            <tr>
+                <td>
+                    <span>@item.Id</span>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegNo)
+                </td>
+                <td>
+
+                    <span data-bind='text:  Status() == true && Id()==@Html.Raw(Json.Encode(item.Id))   ? "Online" : "Offline"  '></span>
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.ApplicationUserID)
+                </td>*@
+
+            </tr>
+            <!-- /ko -->
+        }
+
+    </table>
+</div>

@@ -65,6 +65,13 @@ namespace VehicleTrack.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "Customer Address")]
+        public string Address { get; set; }
+        [Required]
+        [Display(Name="Customer Name")]
+        public string FullName { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }

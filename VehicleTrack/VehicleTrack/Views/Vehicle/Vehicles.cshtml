@@ -1,0 +1,50 @@
+﻿@model IEnumerable<VehicleTrack.Models.Vehicle>
+
+@section Scripts{
+    <script src="~/Scripts/index.js"></script>
+}
+@{
+    ViewBag.Title = "Vehicles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Vehicles</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<h3>
+
+    @ViewBag.Name
+
+</h3>
+
+
+
+<div id="myVehicles">
+    <h5 data-bind="visible: connected">Connected to message hub</h5>
+    @*<span data-bind="text: Id"></span>*@
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.VIN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+
+        </tr>
+
+        <!-- ko foreach: vehicles -->
+        <tr >
+            <td ><span data-bind="text: Id"></span></td>
+            <td data-bind="text: Status"></td>
+        </tr>
+        <!-- /ko -->
+
+    </table>
+</div>
+

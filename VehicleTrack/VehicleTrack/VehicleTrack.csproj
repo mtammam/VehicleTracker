@@ -45,10 +45,33 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.1.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.1.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.0.0\lib\net451\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -99,9 +122,6 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -139,18 +159,6 @@
     <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
       <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="Owin">
-      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin">
-      <HintPath>..\packages\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Host.SystemWeb">
-      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.0.0\lib\net451\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security">
-      <HintPath>..\packages\Microsoft.Owin.Security.4.0.0\lib\net451\Microsoft.Owin.Security.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Owin.Security.Cookies">
       <HintPath>..\packages\Microsoft.Owin.Security.Facebook.4.0.0\lib\net451\Microsoft.Owin.Security.Facebook.dll</HintPath>
     </Reference>
@@ -187,12 +195,15 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\Api\VehicleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\VehicleController.cs" />
+    <Compile Include="Extentions\IdentityExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Hubs\vehicleHub.cs" />
     <Compile Include="Migrations\201902202113145_bigbang.cs" />
     <Compile Include="Migrations\201902202113145_bigbang.Designer.cs">
       <DependentUpon>201902202113145_bigbang.cs</DependentUpon>
@@ -205,12 +216,53 @@
     <Compile Include="Migrations\201902202131579_customerInhirtesFromUserIdentity.Designer.cs">
       <DependentUpon>201902202131579_customerInhirtesFromUserIdentity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201902210725386_modifieModel\.cs" />
+    <Compile Include="Migrations\201902210725386_modifieModel\.Designer.cs" />
+    <Compile Include="Migrations\201902210728397_useUsersInsteadOfCustomers.cs" />
+    <Compile Include="Migrations\201902210728397_useUsersInsteadOfCustomers.Designer.cs">
+      <DependentUpon>201902210728397_useUsersInsteadOfCustomers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902210734392_modefyUserData.cs" />
+    <Compile Include="Migrations\201902210734392_modefyUserData.Designer.cs">
+      <DependentUpon>201902210734392_modefyUserData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902210801452_RenameVehiclesToVehicle.cs" />
+    <Compile Include="Migrations\201902210801452_RenameVehiclesToVehicle.Designer.cs">
+      <DependentUpon>201902210801452_RenameVehiclesToVehicle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902210840149_solveRelationInVehicles.cs" />
+    <Compile Include="Migrations\201902210840149_solveRelationInVehicles.Designer.cs">
+      <DependentUpon>201902210840149_solveRelationInVehicles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902210925589_editNameToFullName.cs" />
+    <Compile Include="Migrations\201902210925589_editNameToFullName.Designer.cs">
+      <DependentUpon>201902210925589_editNameToFullName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902211003404_changeVehicleIdToString.cs" />
+    <Compile Include="Migrations\201902211003404_changeVehicleIdToString.Designer.cs">
+      <DependentUpon>201902211003404_changeVehicleIdToString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902211004445_changeVehicleIdToStringv1.cs" />
+    <Compile Include="Migrations\201902211004445_changeVehicleIdToStringv1.Designer.cs">
+      <DependentUpon>201902211004445_changeVehicleIdToStringv1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902211017417_v1.cs" />
+    <Compile Include="Migrations\201902211017417_v1.Designer.cs">
+      <DependentUpon>201902211017417_v1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902211021274_v2.cs" />
+    <Compile Include="Migrations\201902211021274_v2.Designer.cs">
+      <DependentUpon>201902211021274_v2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902212142581_deleteCustomerTable.cs" />
+    <Compile Include="Migrations\201902212142581_deleteCustomerTable.Designer.cs">
+      <DependentUpon>201902212142581_deleteCustomerTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Vehicles.cs" />
+    <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -229,18 +281,26 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.3.1.js" />
-    <Content Include="Scripts\jquery-3.3.1.min.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.js" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\index.js" />
+    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.signalR-2.1.2.js" />
+    <Content Include="Scripts\jquery.signalR-2.1.2.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\knockout-3.2.0.debug.js" />
+    <Content Include="Scripts\knockout-3.2.0.js" />
+    <Content Include="Scripts\knockout.mapping-latest.debug.js" />
+    <Content Include="Scripts\knockout.mapping-latest.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -274,7 +334,10 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Vehicle\Vehicles.cshtml" />
+    <Content Include="Views\Vehicle\NewVehicle.cshtml" />
+    <Content Include="Views\Vehicle\RuningVehicles.cshtml" />
+    <Content Include="Views\Vehicle\VheicleList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201902202113145_bigbang.resx">
@@ -285,6 +348,39 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201902202131579_customerInhirtesFromUserIdentity.resx">
       <DependentUpon>201902202131579_customerInhirtesFromUserIdentity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902210725386_modifieModel\.resx">
+      <DependentUpon>.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902210728397_useUsersInsteadOfCustomers.resx">
+      <DependentUpon>201902210728397_useUsersInsteadOfCustomers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902210734392_modefyUserData.resx">
+      <DependentUpon>201902210734392_modefyUserData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902210801452_RenameVehiclesToVehicle.resx">
+      <DependentUpon>201902210801452_RenameVehiclesToVehicle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902210840149_solveRelationInVehicles.resx">
+      <DependentUpon>201902210840149_solveRelationInVehicles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902210925589_editNameToFullName.resx">
+      <DependentUpon>201902210925589_editNameToFullName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902211003404_changeVehicleIdToString.resx">
+      <DependentUpon>201902211003404_changeVehicleIdToString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902211004445_changeVehicleIdToStringv1.resx">
+      <DependentUpon>201902211004445_changeVehicleIdToStringv1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902211017417_v1.resx">
+      <DependentUpon>201902211017417_v1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902211021274_v2.resx">
+      <DependentUpon>201902211021274_v2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902212142581_deleteCustomerTable.resx">
+      <DependentUpon>201902212142581_deleteCustomerTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -297,10 +393,10 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ViewModel\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

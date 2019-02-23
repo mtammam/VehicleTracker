@@ -26,7 +26,7 @@ namespace VehicleTrack.Controllers.Api
         public void Post(Vehicle vehicle)
         {
             var context = GlobalHost.ConnectionManager.GetHubContext<vehicleHub>();
-            context.Clients.All.vhehicleStatusMessage(vehicle.Id, vehicle.Status);
+            context.Clients.All.vhehicleStatusMessage(vehicle.Id, vehicle.Status,vehicle.ApplicationUserID);
            
         }
 

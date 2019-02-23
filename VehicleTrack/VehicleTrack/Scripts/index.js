@@ -21,25 +21,30 @@
     var hub = $.connection.vehicleHub;
 
     // Add a handler to receive updates from the server
-    hub.client.vhehicleStatusMessage = function (Id, Status) {
+    hub.client.vhehicleStatusMessage = function (Id, Status, ApplicationUserID) {
         
         var vehicle = {
             Id: Id,
-            Status: Status
+            Status: Status,
+            ApplicationUserID: ApplicationUserID
         };
 
         var vehicleModel = ko.mapping.fromJS(vehicle);
+
 
         // Check if we already have it:
         var match = ko.utils.arrayFirst(vm.vehicles(), function (item) {
             return item.Id() == Id;
         });
-        
+
+      
+
         if (!match)
-            vm.vehicles.push(vehicleModel);
-        else {
+        {  vm.vehicles.push(vehicleModel); }
+        else {           
             var index = vm.vehicles.indexOf(match);
             vm.vehicles.replace(vm.vehicles()[index], vehicleModel);
+          
         }
     };
 

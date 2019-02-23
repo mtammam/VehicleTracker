@@ -36,7 +36,7 @@
 
         @foreach (var item in Model)
         {
-            <!-- ko foreach: vehicles -->
+            
 
             <tr>
                 <td>
@@ -46,15 +46,19 @@
                     @Html.DisplayFor(modelItem => item.RegNo)
                 </td>
                 <td>
-
-                    <span data-bind='text:  Status() == true && Id()==@Html.Raw(Json.Encode(item.Id))   ? "Online" : "Offline"  '></span>
+                    <!-- ko foreach: vehicles -->
+                    
+                    <!-- ko {if: Id()==@Html.Raw(Json.Encode(item.Id))} -->
+                    <div   data-bind='text:  Status() == true  ? "Online" : "Offline" '></div>
+                    <!-- /ko -->
+                    <!-- /ko -->
                 </td>
                 @*<td>
                     @Html.DisplayFor(modelItem => item.ApplicationUserID)
                 </td>*@
 
             </tr>
-            <!-- /ko -->
+           
         }
 
     </table>

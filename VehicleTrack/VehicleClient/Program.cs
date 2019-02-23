@@ -19,9 +19,10 @@ namespace VehicleClient
         {
             while (true)
             {
-                if (Console.ReadLine() == 1.ToString())
+                var x = Console.ReadLine();
+                if ( x== 1.ToString())
                     sendData(true);
-                else if (Console.ReadLine() == 1.ToString())
+                else if (x == 2.ToString())
                     sendData(false);
             }
         }
@@ -30,7 +31,7 @@ namespace VehicleClient
         {
             var postData = new
             {
-                Id = 1,
+                Id = 9,
                 Status= flage
             };
 

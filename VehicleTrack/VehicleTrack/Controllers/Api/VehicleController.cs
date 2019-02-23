@@ -10,7 +10,7 @@ using VehicleTrack.Models;
 
 namespace VehicleTrack.Controllers.Api
 {
-    [System.Web.Http.Authorize]
+    
     public class VehicleController : ApiController
     {
         ApplicationDbContext _context;

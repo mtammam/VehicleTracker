@@ -9,9 +9,9 @@ namespace VehicleTrack.Hubs
 
     public class vehicleHub : Hub
     {
-        public void SendVehicleStatus(int Id, bool Status)
+        public void SendVehicleStatus(int Id, bool Status,string ApplicationUserID)
         {
-            this.Clients.All.vhehicleStatusMessage(Id,Status);
+            this.Clients.All.vhehicleStatusMessage(Id,Status, ApplicationUserID);
         }
     }
 }

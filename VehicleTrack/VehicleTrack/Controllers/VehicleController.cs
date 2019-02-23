@@ -50,7 +50,7 @@ namespace VehicleTrack.Controllers
         {
             ViewBag.Name = User.Identity.GetFullName();
             var userId = User.Identity.GetUserId();
-            var vehicles = _context.Vehicle;//.Include(u=>u.ApplicationUser).Where(e => e.ApplicationUserID ==userId );
+            var vehicles = _context.Vehicle.Include(u=>u.ApplicationUser).Where(e => e.ApplicationUserID ==userId );
 
             return View(vehicles);
         }
@@ -59,7 +59,7 @@ namespace VehicleTrack.Controllers
         {
             ViewBag.Name = User.Identity.GetFullName();
             var userId = User.Identity.GetUserId();
-            var vehicles = _context.Vehicle;//.Include(u=>u.ApplicationUser).Where(e => e.ApplicationUserID ==userId );
+            var vehicles = _context.Vehicle.Include(u=>u.ApplicationUser).Where(e => e.ApplicationUserID ==userId );
 
             return View(vehicles);
         }

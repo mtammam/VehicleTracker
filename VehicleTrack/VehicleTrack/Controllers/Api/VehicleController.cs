@@ -10,6 +10,7 @@ using VehicleTrack.Models;
 
 namespace VehicleTrack.Controllers.Api
 {
+    [System.Web.Http.Authorize]
     public class VehicleController : ApiController
     {
         ApplicationDbContext _context;
@@ -30,10 +31,10 @@ namespace VehicleTrack.Controllers.Api
            
         }
 
-        [HttpGet]
-        public IEnumerable<Vehicle> GetVehicles(string userId)
+        //[HttpGet]
+        public IEnumerable<Vehicle> GetVehicles()
         {
-            var Vehicles = _context.Vehicle;//.Where(e => e.ApplicationUserID.ToLower() == userId.ToLower());
+            var Vehicles = _context.Vehicle.ToList();//.Where(e => e.ApplicationUserID == userId).ToList();
             return Vehicles;
            
         }

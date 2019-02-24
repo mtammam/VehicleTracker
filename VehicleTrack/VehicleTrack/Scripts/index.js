@@ -21,7 +21,7 @@
     var hub = $.connection.vehicleHub;
 
     // Add a handler to receive updates from the server
-    hub.client.vhehicleStatusMessage = function (Id, Status, ApplicationUserID) {
+    hub.client.vhehicleStatusMessage = function (Id, Status = false, ApplicationUserID) {
         
         var vehicle = {
             Id: Id,

@@ -19,11 +19,11 @@ namespace VehicleTrack.Controllers.Api
             _context = new ApplicationDbContext();
         }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    base.Dispose(disposing);
-        //    _context.Dispose();
-        //}
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+            _context.Dispose();
+        }
         public void Post(Vehicle vehicle)
         {
             var context = GlobalHost.ConnectionManager.GetHubContext<vehicleHub>();

@@ -282,6 +282,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\index.js" />
+    <Content Include="Content\CV.pdf" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
@@ -334,10 +335,8 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Vehicle\Vehicles.cshtml" />
     <Content Include="Views\Vehicle\NewVehicle.cshtml" />
     <Content Include="Views\Vehicle\RuningVehicles.cshtml" />
-    <Content Include="Views\Vehicle\VheicleList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201902202113145_bigbang.resx">

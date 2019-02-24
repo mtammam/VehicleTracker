@@ -31,7 +31,8 @@ namespace VehicleTrack.Controllers
             return View();
         }
 
-
+        
+        
         public ActionResult NewVehicle(Vehicle vehicle)
         {
 
@@ -57,7 +58,9 @@ namespace VehicleTrack.Controllers
 
         public ActionResult RuningVehicles()
         {
+            
             ViewBag.Name = User.Identity.GetFullName();
+            ViewBag.Address = User.Identity.GetAddress();
             var userId = User.Identity.GetUserId();
             var vehicles = _context.Vehicle.Include(u=>u.ApplicationUser).Where(e => e.ApplicationUserID ==userId );
 

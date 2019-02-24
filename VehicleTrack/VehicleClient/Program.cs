@@ -19,20 +19,34 @@ namespace VehicleClient
       
         static int vehicleId;
         static bool status;
+        static string YorN;
         static HttpClient _client;
         static  void Main(string[] args)
         {
 
-         
+            Console.WriteLine("Welcom To Car Tracker");
             while (true)
             {
-                Console.WriteLine("Enter Vehicle Id");
+                Console.WriteLine("Please Enter Your Vehicle Id");
                 vehicleId = int.Parse(Console.ReadLine());
-                Console.WriteLine("Enter Vehicle status");
-                status = bool.Parse(Console.ReadLine());
-                sendData(vehicleId, status);
+                Console.WriteLine("Is Your Car Enggaged [Y] BreakDown[N]");
+            l: YorN = Console.ReadLine();
+                if (YorN.ToLower() == "y")
+                {
+                    sendData(vehicleId, true);
+                    Console.WriteLine("Vehicle Is Engaged Now ...");
+                }
+                else if (YorN == "n")
+                {
+                    sendData(vehicleId, false);
+                    Console.WriteLine("Vehicle Is Disengaged Now ...");
+                }
+                else
+                {
+                    Console.WriteLine("Please Enter Y/N");
+                    goto l;
+                }
 
-               
             }
         }
 

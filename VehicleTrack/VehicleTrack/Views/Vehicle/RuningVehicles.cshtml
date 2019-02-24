@@ -5,11 +5,15 @@
 }
 
 @{
-    ViewBag.Title = "RuningVehicles";
+   // ViewBag.Title = "RuningVehicles";
     Layout = "~/Views/Shared/_Layout.cshtml";
+       
 }
 
 <h2>RuningVehicles</h2>
+<h3>@User.Identity.Name</h3>
+<h3>@ViewBag.FullName</h3>
+
 
 <p>
     @Html.ActionLink("Add Vehicle", "NewVehicle")
@@ -19,7 +23,7 @@
 
     <table class="table">
         <tr>
-            <th style="display:none">
+            <th>
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
@@ -32,38 +36,38 @@
                 @Html.DisplayNameFor(model => model.Status)
             </th>
             @*<th>
-            @Html.DisplayNameFor(model => model.ApplicationUserID)
-        </th>*@
+                    @Html.DisplayNameFor(model => model.ApplicationUserID)
+                </th>*@
             <th></th>
         </tr>
 
         @foreach (var item in Model)
         {
-            
 
-        <tr>
-            <td style="display:none">
-                <span>@item.Id</span>
-            </td>
-            <td>
-                <span>@item.VIN</span>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RegNo)
-            </td>
-            <td>
-                <!-- ko foreach: vehicles -->
-                <!-- ko {if: Id()==@Html.Raw(Json.Encode(item.Id))} -->
-                <div data-bind='text:  Status() == true  ? "Online" : "Offline" '></div>
-                <!-- /ko -->
-                <!-- /ko -->
-            </td>
-            @*<td>
-            @Html.DisplayFor(modelItem => item.ApplicationUserID)
-        </td>*@
 
-        </tr>
-           
+            <tr>
+                <td>
+                    <span>@item.Id</span>
+                </td>
+                <td>
+                    <span>@item.VIN</span>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegNo)
+                </td>
+                <td>
+                    <!-- ko foreach: vehicles -->
+                    <!-- ko {if: Id()==@Html.Raw(Json.Encode(item.Id))} -->
+                    <div data-bind='text:  Status() == true  ? "Online" : "Offline" '></div>
+                    <!-- /ko -->
+                    <!-- /ko -->
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.ApplicationUserID)
+                    </td>*@
+
+            </tr>
+
         }
 
     </table>

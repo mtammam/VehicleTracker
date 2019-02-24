@@ -17,6 +17,7 @@ namespace VehicleTrack.Models
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
             userIdentity.AddClaim(new Claim("FullName", this.FullName));
+            userIdentity.AddClaim(new Claim("Address", this.Address));
 
             return userIdentity;
         }
